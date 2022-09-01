@@ -1,11 +1,9 @@
 package com.it.ky.schedule.controller;
 
-import com.it.ky.schedule.base.BaseResponse;
+import com.it.ky.schedule.entity.ReturnData;
 import com.it.ky.schedule.entity.User;
 import com.it.ky.schedule.service.UserService;
 import com.it.ky.schedule.util.DateUtil;
-import lombok.Data;
-import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
@@ -20,7 +18,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.IOException;
 import java.text.ParseException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author yangchangkui
@@ -41,8 +42,8 @@ public class UserController {
      * @return
      */
     @RequestMapping("/getAllUser")
-    public BaseResponse getAllUser(){
-        BaseResponse response = new BaseResponse();
+    public ReturnData getAllUser(){
+        ReturnData response = new ReturnData();
         List<User> allUser = userService.getAllUser();
         response.setData(allUser);
         return response;
@@ -54,7 +55,7 @@ public class UserController {
      * @return
      */
     @RequestMapping("/getAllDutyUser")
-    public BaseResponse getAllDutyUser(){
+    public ReturnData getAllDutyUser(){
         return userService.getAllDutyUser();
     }
 
@@ -67,13 +68,13 @@ public class UserController {
      * @return
      */
     @RequestMapping("/scheduleDuty")
-    public BaseResponse scheduleDuty(@RequestParam String startDate, @RequestParam String endDate){
+    public ReturnData scheduleDuty(@RequestParam String startDate, @RequestParam String endDate){
         //查询所有人
         List<User> allUser = userService.getAllUser();
 
         logger.debug("allUser:"+allUser);
         if(allUser == null || allUser.size() == 0){
-            return new BaseResponse(-1,"没有人可安排值日！");
+            return new ReturnData("没有人可安排值日！");
         }
         List<String> dateList = new ArrayList<>();
         //只有开始时间，默认排完所有人，单人排
@@ -110,7 +111,7 @@ public class UserController {
 
 
             }
-            BaseResponse response = new BaseResponse();
+        ReturnData response = new ReturnData();
             response.setData(tempMap);
             return response;
     }
@@ -125,7 +126,7 @@ public class UserController {
      * @return
      */
     @PostMapping("/sendEmail")
-    public BaseResponse sendEmail(@RequestBody Map<String,String> model){
+    public ReturnData sendEmail(@RequestBody Map<String,String> model){
         //TODO:邮件发送
         return null;
     }
@@ -137,7 +138,7 @@ public class UserController {
      * @return
      */
     @RequestMapping("/saveUser")
-    public BaseResponse saveUser(@RequestBody User model){
+    public ReturnData saveUser(@RequestBody User model){
         return userService.saveUser(model);
     }
 
@@ -146,9 +147,9 @@ public class UserController {
      * @return
      */
     @RequestMapping("/uploadFile")
-    public BaseResponse uploadFile(@RequestParam("file") MultipartFile file,HttpServletRequest request, HttpServletResponse response){
+    public ReturnData uploadFile(@RequestParam("file") MultipartFile file,HttpServletRequest request, HttpServletResponse response){
         if(file.isEmpty()) {
-            return new BaseResponse(1,"请选择文件");
+            return new ReturnData("请选择文件");
         }
         //上传到upload目录下
         String fileName = "upload\\"+file.getOriginalFilename();
@@ -161,14 +162,10 @@ public class UserController {
         }
         try {
             file.transferTo(dest);
-            return new BaseResponse(fileName);
+            return new ReturnData(fileName);
         } catch (IOException e) {
             e.printStackTrace();
-            return new BaseResponse(-100,e.getMessage());
+            return new ReturnData(false,"fail",e.getMessage());
         }
     }
-
-
-
-
 }

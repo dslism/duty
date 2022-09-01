@@ -1,5 +1,6 @@
 package com.it.ky.schedule.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.it.ky.schedule.entity.EmailInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
@@ -9,7 +10,7 @@ import org.apache.ibatis.annotations.Select;
  * @date: 2018-11-03 17:24
  */
 @Mapper
-public interface EmailMapper {
+public interface EmailMapper extends BaseMapper<EmailInfo> {
     /**
      * 查询需要发送的邮件内容信息
      * @return

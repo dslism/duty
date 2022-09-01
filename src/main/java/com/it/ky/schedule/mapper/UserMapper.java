@@ -1,6 +1,8 @@
 package com.it.ky.schedule.mapper;
 
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.it.ky.schedule.entity.DutyUser;
+import com.it.ky.schedule.entity.EmailInfo;
 import com.it.ky.schedule.entity.User;
 import org.apache.ibatis.annotations.*;
 
@@ -13,7 +15,7 @@ import java.util.Map;
  * @date: 2018-11-03 10:47
  */
 @Mapper
-public interface UserMapper {
+public interface UserMapper extends BaseMapper<User> {
     /**
      * 查询所有人
      * @return

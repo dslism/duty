@@ -1,12 +1,11 @@
 package com.it.ky.schedule.service.impl;
 
-import com.it.ky.schedule.base.BaseResponse;
 import com.it.ky.schedule.entity.DutyUser;
+import com.it.ky.schedule.entity.ReturnData;
 import com.it.ky.schedule.entity.User;
 import com.it.ky.schedule.mapper.UserMapper;
 import com.it.ky.schedule.service.UserService;
 import com.it.ky.schedule.util.DateUtil;
-import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -35,22 +34,22 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public BaseResponse getAllDutyUser() {
+    public ReturnData getAllDutyUser() {
 
         List<Map> mapList = userMapper.queryAllDutyUser();
 
-        BaseResponse baseResponse = new BaseResponse();
+        ReturnData baseResponse = new ReturnData();
         baseResponse.setData(mapList);
 
         return baseResponse;
     }
 
     @Override
-    public BaseResponse saveUser(User model) {
+    public ReturnData saveUser(User model) {
 
         int line = userMapper.insertUser(model);
 
-        return new BaseResponse(line);
+        return new ReturnData(line);
     }
 
     @Override

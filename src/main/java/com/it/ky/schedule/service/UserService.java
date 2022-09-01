@@ -1,11 +1,10 @@
 package com.it.ky.schedule.service;
 
 
-import com.it.ky.schedule.base.BaseResponse;
+import com.it.ky.schedule.entity.ReturnData;
 import com.it.ky.schedule.entity.User;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author yangchangkui
@@ -27,13 +26,13 @@ public interface UserService {
      * 获取值日生
      * @return
      */
-    BaseResponse getAllDutyUser();
+    ReturnData getAllDutyUser();
 
     /**
      * 保存添加用户
      * @return
      */
-    BaseResponse saveUser(User model);
+    ReturnData saveUser(User model);
 
     /**
      * 新增或更新值日生
