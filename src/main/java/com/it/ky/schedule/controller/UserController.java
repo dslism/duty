@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.validation.annotation.Validated;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +28,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+
+
+
+
 
 /**
  * @author yangchangkui
@@ -45,6 +52,17 @@ public class UserController {
 
     @Resource
     private UserService userService;
+
+    @GetMapping("/login")
+    public String login(String username, String password) {
+        if (username.equals(realUsername) && password.equals(realPassword)) {
+            User u = new User();
+            u.setPassword(password);
+            u.setUsername(username);
+            return JWTUtils.getToken(u);
+        }
+        return "登录失败！账号或者密码不对！";
+    }
 
 
     /**
