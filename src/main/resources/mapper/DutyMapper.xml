@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- namespace命名空间，必须与创建maven groupId + artifactId组成
+否则，在配置文件mybatis.xml中无法找到映射文件
+-->
+<mapper namespace="com.it.ky.schedule.mapper.DutyMapper">
+
+    <!--  在yml文件中添加了包名别称  -->
+    <select id="selectAllStudent" resultType="Student">
+        select * from student;
+    </select>
+
+    <!--条件查询，注意部分字符需转义，如小于,<![CDATA[ < ]]>
+    resultMap为上诉建立的实体对象
+    -->
+<!--    <select id="findByCondition" parameterType="int" resultMap="stu">-->
+<!--        select * from student where age <![CDATA[ < ]]>#{age};-->
+<!--    </select>-->
+<!--    <select id="selectStuName" parameterType="java.lang.String" resultType="java.lang.String">-->
+<!--        select name from student where studentID=#{studentID};-->
+<!--    </select>-->
+</mapper>

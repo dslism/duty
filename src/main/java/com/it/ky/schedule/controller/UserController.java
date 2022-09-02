@@ -1,13 +1,17 @@
 package com.it.ky.schedule.controller;
 
+import com.it.ky.schedule.entity.Pwd;
 import com.it.ky.schedule.entity.ReturnData;
 import com.it.ky.schedule.entity.User;
+import com.it.ky.schedule.mapper.PwdMapper;
+import com.it.ky.schedule.mapper.UserMapper;
 import com.it.ky.schedule.service.UserService;
 import com.it.ky.schedule.util.DateUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.DateUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -31,7 +35,13 @@ import java.util.Map;
 public class UserController {
 
 
-    private Logger logger = LoggerFactory.getLogger(this.getClass());
+    @GetMapping("/test")
+    public ReturnData test(){
+        Pwd pwd = pwdMapper.selectById("1");
+        return new ReturnData(pwd);
+    }
+
+//    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Resource
     private UserService userService;

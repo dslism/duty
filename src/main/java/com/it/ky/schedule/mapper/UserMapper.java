@@ -43,8 +43,8 @@ public interface UserMapper extends BaseMapper<User> {
      * @param user
      * @return
      */
-    @Insert("INSERT INTO user(name,email,motto,photoPath) VALUES(#{name},#{email},#{motto},#{photoPath})")
-    int insertUser(User user);
+//    @Insert("INSERT INTO user(name,email,motto,photoPath) VALUES(#{name},#{email},#{motto},#{photoPath})")
+//    int insertUser(User user);
 
 
     /**

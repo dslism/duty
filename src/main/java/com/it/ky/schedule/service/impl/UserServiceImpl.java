@@ -3,9 +3,11 @@ package com.it.ky.schedule.service.impl;
 import com.it.ky.schedule.entity.DutyUser;
 import com.it.ky.schedule.entity.ReturnData;
 import com.it.ky.schedule.entity.User;
+import com.it.ky.schedule.mapper.PwdMapper;
 import com.it.ky.schedule.mapper.UserMapper;
 import com.it.ky.schedule.service.UserService;
 import com.it.ky.schedule.util.DateUtil;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,9 +20,10 @@ import java.util.Map;
  */
 @Service("userService")
 public class UserServiceImpl implements UserService {
-
-    @Resource
-    private UserMapper userMapper;
+    @Autowired
+    PwdMapper pwdMapper;
+    @Autowired
+    UserMapper userMapper;
 
     @Override
     public List<User> getAllUser() {
@@ -46,10 +49,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ReturnData saveUser(User model) {
+        userMapper.insert(model);
 
-        int line = userMapper.insertUser(model);
+//        int line = userMapper.insertUser(model);
 
-        return new ReturnData(line);
+        return new ReturnData(model);
     }
 
     @Override
