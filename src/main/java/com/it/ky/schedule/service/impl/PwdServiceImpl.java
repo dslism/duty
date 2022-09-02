@@ -13,7 +13,8 @@ public class PwdServiceImpl {
     private PwdMapper pwdMapper;
 
     public Pwd LoginIn(String name, String password) {
-        return PwdMapper.getInfo(name,password);
+        Pwd info = PwdMapper.getInfo(name, password);
+        return info;
     }
 
 }
