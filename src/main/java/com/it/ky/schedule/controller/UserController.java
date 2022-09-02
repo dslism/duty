@@ -53,16 +53,6 @@ public class UserController {
     @Resource
     private UserService userService;
 
-    @GetMapping("/login")
-    public String login(String username, String password) {
-        if (username.equals(realUsername) && password.equals(realPassword)) {
-            User u = new User();
-            u.setPassword(password);
-            u.setUsername(username);
-            return JWTUtils.getToken(u);
-        }
-        return "登录失败！账号或者密码不对！";
-    }
 
 
     /**

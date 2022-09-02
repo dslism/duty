@@ -1,15 +1,24 @@
 package com.it.ky.schedule.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.it.ky.schedule.entity.EmailInfo;
 import com.it.ky.schedule.entity.Pwd;
 import org.apache.ibatis.annotations.Mapper;
+import com.it.ky.schedule.entity.Pwd;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-/**
- * 用户Mapper
- * @author: yangchangkui
- * @date: 2018-11-03 10:47
- */
+
+
 @Mapper
-public interface PwdMapper extends BaseMapper<Pwd> {
-
+public interface PwdMapper  {
+    //查询，可以实现登录功能
+    @Select("SELECT * FROM user WHERE name = #{name} AND password = #{password}")
+    static Pwd getInfo(@Param("name") String name, @Param("pwd") String password);
 }
+
+
